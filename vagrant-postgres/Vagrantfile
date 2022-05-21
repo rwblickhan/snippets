@@ -1,0 +1,17 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "centos/7"
+  # Forward default Postgres post 5432 on guest to port 15432 on host
+  config.vm.network "forwarded_port", guest: 5432, host: 15432, host_ip: "127.0.0.1"
+  config.vm.provision "podman" do |d|
+    # Pull Postgres container
+    d.pull_images "postgres"
+    # Run Postgres container with password 1234
+    d.run "postgres",
+      args: "-e POSTGRES_PASSWORD=1234 -p 5432:5432"
+      # Uncomment the following line and  put `.sql` files in `/vagrant/db` to init default data
+      # args: "-e POSTGRES_PASSWORD=1234 -p 5432:5432 -v '/vagrant/db:/docker-entrypoint-initdb.d:Z'"
+  end
+end
