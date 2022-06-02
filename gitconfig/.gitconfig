@@ -1,16 +1,16 @@
-# Use Delta for diffing
+# Use `delta` for diffing
 [pager]
     diff = delta
     log = delta
     reflog = delta
     show = delta
-	branch = false
+    branch = false
 [interactive]
     diffFilter = delta --color-only --features=interactive
 [pull]
-	rebase = false
+    rebase = false
 [init]
-	defaultBranch = main
+    defaultBranch = main
 [alias]
     # Use `git b` for a fancy branch switcher
     # Requires `fzf` to be installed
