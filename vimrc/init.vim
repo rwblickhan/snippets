@@ -1,6 +1,18 @@
 " Set up vim-plug plugins
+" :PlugInstall to install
 call plug#begin()
+" Palenight theme
 Plug 'drewtempelmeyer/palenight.vim'
+" Dependencies for Trouble
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'folke/lsp-colors.nvim'
+" A pretty LSP diagnostics menu
+" :Trouble to pull it up
+Plug 'folke/trouble.nvim'
+" Dependency for null-ls
+Plug 'nvim-lua/plenary.nvim'
+" Hook non-LSP sources into neovim's LSP implementation
+Plug 'jose-elias-alvarez/null-ls.nvim'
 call plug#end()
 
 " Navigate up and down visual lines instead of logical ones
@@ -27,3 +39,13 @@ set background=dark
 colorscheme palenight
 set termguicolors
 let g:palenight_terminal_italics=1
+
+lua << EOF
+  require("trouble").setup { }
+  require("null-ls").setup({
+    sources = {
+        require("null-ls").builtins.diagnostics.vale,
+        require("null-ls").builtins.diagnostics.markdownlint
+    },
+})
+EOF
