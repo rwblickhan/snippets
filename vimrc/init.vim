@@ -41,11 +41,17 @@ set termguicolors
 let g:palenight_terminal_italics=1
 
 lua << EOF
-  require("trouble").setup { }
+  -- Set :Format as an alias for LSP formatting
+  vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting_sync()' ]]
+  -- Set <leader>f as an alias for :Format
+  vim.api.nvim_set_keymap("n", "<leader>f", ":Format<cr>", { noremap = true })
+
   require("null-ls").setup({
     sources = {
         require("null-ls").builtins.diagnostics.vale,
-        require("null-ls").builtins.diagnostics.markdownlint
+        require("null-ls").builtins.diagnostics.markdownlint,
+        require("null-ls").builtins.formatting.terraform_fmt
     },
+  require("trouble").setup {}
 })
 EOF
