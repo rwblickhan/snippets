@@ -46,12 +46,17 @@ lua << EOF
   -- Set <leader>f as an alias for :Format
   vim.api.nvim_set_keymap("n", "<leader>f", ":Format<cr>", { noremap = true })
 
+  require("trouble").setup {}
   require("null-ls").setup({
     sources = {
-        require("null-ls").builtins.diagnostics.vale,
+        require("null-ls").builtins.diagnostics.flake8,
+        require("null-ls").builtins.diagnostics.hadolint,
         require("null-ls").builtins.diagnostics.markdownlint,
+        require("null-ls").builtins.diagnostics.shellcheck,
+        -- require("null-ls").builtins.diagnostics.swiftformat,
+        require("null-ls").builtins.diagnostics.vale,
+        require("null-ls").builtins.diagnostics.yamllint,
         require("null-ls").builtins.formatting.terraform_fmt
     },
-  require("trouble").setup {}
-})
+  })
 EOF
