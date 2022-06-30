@@ -3,6 +3,8 @@
 call plug#begin()
 " Palenight theme
 Plug 'drewtempelmeyer/palenight.vim'
+" Basic LSP configurations
+Plug 'neovim/nvim-lspconfig'
 " Dependencies for Trouble
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'folke/lsp-colors.nvim'
@@ -13,6 +15,8 @@ Plug 'folke/trouble.nvim'
 Plug 'nvim-lua/plenary.nvim'
 " Hook non-LSP sources into neovim's LSP implementation
 Plug 'jose-elias-alvarez/null-ls.nvim'
+" Terraform support
+Plug 'hashivim/vim-terraform'
 call plug#end()
 
 " Navigate up and down visual lines instead of logical ones
